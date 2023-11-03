@@ -16,9 +16,9 @@ class Engine:
                 beta: float) -> tuple:
         available_moves = board.empty_squares
         if len(available_moves) == board.size**2:
-            return 0, random.choice(list(range(board.size**2)))
+            return 0, 4
         if board.is_gameover() or depth >= self.level:
-            return self.evaluate_board(board, depth), None
+            return -1 * self.evaluate_board(board, depth), None
 
         if ai_turn:
             max_eval = float('-inf')
@@ -51,9 +51,9 @@ class Engine:
 
     def evaluate_board(self, board: Board, depth: int) -> Score:
         if board.winner() == self.ai:
-            return -1 * board.size**2 - depth
-        elif board.winner() == self.foe:
             return board.size**2 - depth
+        elif board.winner() == self.foe:
+            return -1 * board.size**2 - depth
         return 0
 
     def evaluate_best_move(self, board: Board) -> Square:
