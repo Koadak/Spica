@@ -5,10 +5,10 @@ WINDOW_WIDTH = 500
 MARGIN = 100
 PROFILE_SIZE = WINDOW_WIDTH // 10
 
-P1_LOGO = pygame.image.load("Spica/assets/star.png")
-P2_LOGO = pygame.image.load("Spica/assets/error.png")
-P1_IMG = pygame.image.load("Spica/assets/happy.png")
-P2_IMG = pygame.image.load("Spica/assets/batman.png")
+P1_LOGO = pygame.image.load("assets/star.png")
+P2_LOGO = pygame.image.load("assets/error.png")
+P1_IMG = pygame.image.load("assets/happy.png")
+P2_IMG = pygame.image.load("assets/batman.png")
 
 P1_AVATAR = pygame.transform.scale(P1_IMG, (PROFILE_SIZE, PROFILE_SIZE))
 P1_RECT = pygame.Rect(10, 10, PROFILE_SIZE, PROFILE_SIZE)
@@ -91,11 +91,11 @@ class Gui:
                            PROFILE_SIZE // 2 + 3)
         if self.board.is_draw():
             self.display_text("Draw!", 50, 'center', WINDOW_WIDTH - 50)
-        elif self.board.winner() == Symbol.CROSS:
-            self.display_text("Batman Wins!", 50, 'center',
-                              WINDOW_WIDTH - MARGIN + 10)
         elif self.board.winner() == Symbol.CIRCLE:
             self.display_text("Newbie Wins!", 50, 'center',
+                              WINDOW_WIDTH - MARGIN + 10)
+        elif self.board.winner() == Symbol.CROSS:
+            self.display_text("Batman Wins!", 50, 'center',
                               WINDOW_WIDTH - MARGIN + 10)
         else:
             if self.board.turn == Symbol.CIRCLE:
@@ -111,9 +111,10 @@ class Gui:
 
         self.window.blit(P1_AVATAR, P1_RECT)
         self.window.blit(P2_AVATAR, P2_RECT)
-        self.display_text(f'{str(self.board.p1_score)}', 50, PROFILE_SIZE + 20, 20, YELLOW)
-        self.display_text(f'{str(self.board.p2_score)}', 50, WINDOW_WIDTH - PROFILE_SIZE - 50, 20, YELLOW)
-
+        self.display_text(f'{str(self.board.p1_score)}', 50, PROFILE_SIZE + 20,
+                          20, YELLOW)
+        self.display_text(f'{str(self.board.p2_score)}', 50,
+                          WINDOW_WIDTH - PROFILE_SIZE - 50, 20, YELLOW)
 
     def update_display(self):
         self.window.fill(BLUE)
